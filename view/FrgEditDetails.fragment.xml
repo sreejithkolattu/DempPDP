@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+	    <Dialog title = "Update Goals" >
+    <l:Grid defaultSpan = "L12 M12 S12" width = "auto" id = "idGrid">
+    <l:content>
+        <f:SimpleForm id="SimpleFormDisplay354"
+            minWidth="1024"
+            maxContainerCols="2"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            title="Employee Goals"
+            labelSpanL="3"
+            labelSpanM="3"
+            emptySpanL="4"
+            emptySpanM="4"
+            columnsL="2"
+            columnsM="2">
+            <f:content>
+                <Label text="Course Title." />
+                <TextArea id="ID_1" editable="false" />
+                <Label text="Start Date" />
+                <TextArea id="ID_2" />
+                <Label text="End Date" />
+                <TextArea id="ID_3" editable="false" />
+                <Label text="Completion Date" />
+                <DatePicker id="complDateDP" value="{path: 'detailView>myDate',type:'sap.ui.model.type.Date'}"  />
+                <TextArea id="ID_4" visible="false" />
+            </f:content>
+        </f:SimpleForm>
+    </l:content>
+    </l:Grid>
+    <buttons>
+    <Button text = "CLOSE" press = "closeDialog" type = "Reject"/>
+    <Button text = "SAVE" press = "onSave" type = "Accept"/>
+    </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,172 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="myapp.controller.Detail">
+
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+
+		<semantic:content>
+			<ObjectHeader id="objectHeader" title="{FirstName}">
+			</ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://goal" tooltip="{i18n>detailIconTabBarInfo}" text="Goals">
+					<content>
+						<Table id="lineItemsList" width="auto" items="{EmpToGoal}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+			            	<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				            <columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn2}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn3}"/>
+					</Column>					
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn4}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn5}"/>
+					</Column>					
+				</columns>
+				            <items>
+					<ColumnListItem type="Detail" detailTap="onEditPress">
+						<cells>
+							<ObjectIdentifier title="{CourseTitle}"/>
+									<Text text="{path: 'GoalId'}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>									
+						            <Text text="{path: 'StartDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						            <Text text="{path: 'EndDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						            <Text text="{path: 'ComplDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+
+						</cells>					
+					</ColumnListItem>
+				</items>
+			            </Table>	
+					</content>
+					</IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://performance" tooltip="{i18n>detailIconTabBarAttachments}" text="Metrics">
+					<content>
+						<Table id="lineItemsList1" width="auto" items="{EmpToGoalMetrics}" updateFinished="onListUpdateFinished2" noDataText="{i18n>detailLineItemTableNoDataText1}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+			            	<headerToolbar>
+					<Toolbar id="lineItemsToolbar1">
+						<Title id="lineItemsHeader1" text="{detailView>/lineItemListTitle1}"/>
+					</Toolbar>
+				</headerToolbar>
+				            <columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn01}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn02}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn03}"/>
+					</Column>					
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn04}" edit="true"/>
+					</Column>
+				</columns>
+				            <items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{MetricsId}"/>
+									<Text text="{path: 'CourseTitle'}"  width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>									
+									<Text text="{path: 'Evidance'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>									
+						            <Text text="{path: 'Remark'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
+						</cells>					
+					</ColumnListItem>
+				</items>
+			            </Table>	
+					</content>
+					</IconTabFilter>
+                    <IconTabFilter id="iconTabBarFilter3" icon="sap-icon://learning-assistant" tooltip="{i18n>detailIconTabBarTraining}" text="Trainings">
+					<content>
+						<Table id="lineItemsTraining" width="auto" items="{EmpToTraining}" updateFinished="onListUpdateFinished3" noDataText="{i18n>detailLineItemTableNoDataText1}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+			            	<headerToolbar>
+					<Toolbar id="lineItemsToolbar2">
+						<Title id="lineItemsHeader2" text="{detailView>/lineItemListTitle2}"/>
+					</Toolbar>
+				</headerToolbar>
+				            <columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn11}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn12}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn13}"/>
+					</Column>					
+				
+				</columns>
+				            <items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{TrainingId}"/>
+									<Text text="{path: 'Description'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>									
+									<Text text="{path: 'TrainingType'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>									
+						           
+						</cells>					
+					</ColumnListItem>
+				</items>
+			            </Table>	
+					</content>
+					</IconTabFilter>			
+                    <IconTabFilter id="iconTabBarFilter4" icon="sap-icon://personnel-view" tooltip="{i18n>detailIconTabBarFeedBack}" text="FeedBack">
+					<content>
+						<Table id="lineItemsFeedBack" width="auto" items="{EmpToFeedBack}" updateFinished="onListUpdateFinished4" noDataText="{i18n>detailLineItemTableNoDataText1}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+			            	<headerToolbar>
+					<Toolbar id="lineItemsToolbar3">
+						<Title id="lineItemsHeader3" text="{detailView>/lineItemListTitle3}"/>
+					</Toolbar>
+				</headerToolbar>
+				            <columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn21}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn22}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn23}"/>
+					</Column>					
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn24}"/>
+					</Column>									
+				</columns>
+				            <items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{FeedbackId}"/>
+									<Text text="{path: 'TrainingplanId'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>									
+									<Text text="{path: 'Ratings'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>									
+									<Text text="{path: 'Description'}" width="auto" maxLines="4" wrapping="true" textAlign="Begin" textDirection="Inherit"/>															           
+						</cells>					
+					</ColumnListItem>
+				</items>
+			            </Table>	
+					</content>
+					</IconTabFilter>			
+				</items>
+			</IconTabBar>
+
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+
+	</semantic:DetailPage>
+
+</mvc:View>

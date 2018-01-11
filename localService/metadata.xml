@@ -1,0 +1,77 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="Z_PDP_TRACKING_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="Employee" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EmpId"/>
+                </Key>
+                <Property Name="EmpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Employee ID" sap:updatable="false"/>
+                <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="First Name" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Last Name" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Grade" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Employee Grade"/>
+                <Property Name="SapId" Type="Edm.String" Nullable="false" MaxLength="11" sap:label="SAP S User ID" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="EmpToGoal" Relationship="Z_PDP_TRACKING_SRV.EmpToEmpGoal" FromRole="FromRole_EmpToEmpGoal" ToRole="ToRole_EmpToEmpGoal"/>
+            </EntityType>
+            <EntityType Name="Course" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CourseId"/>
+                </Key>
+                <Property Name="CourseId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Course ID" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CourseTitle" Type="Edm.String" Nullable="false" MaxLength="100" sap:label="Course Title" sap:creatable="false"/>
+                <Property Name="CourseType" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Course Type" sap:creatable="false"/>
+                <Property Name="Duration" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Course Duration" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LearningSource" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Learning Source" sap:creatable="false"/>
+            </EntityType>
+            <EntityType Name="EmployeeGoal" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="GoalId"/>
+                </Key>
+                <Property Name="GoalId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Goal ID" sap:updatable="false"/>
+                <Property Name="CourseId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Course ID"/>
+                <Property Name="EmpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Employee ID"/>
+                <Property Name="StartDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Course Start Date" sap:filterable="false"/>
+                <Property Name="EndDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Course End Date" sap:filterable="false"/>
+                <Property Name="ComplDate" Type="Edm.DateTime" Precision="0" sap:label="Course Completion Date" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Metric" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MetricsId"/>
+                </Key>
+                <Property Name="MetricsId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Metrics ID" sap:updatable="false"/>
+                <Property Name="GoalId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Goal ID"/>
+                <Property Name="Evidance" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Evidance" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Remark" Type="Edm.String" Nullable="false" MaxLength="100" sap:label="Remarks" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="EmpToEmpGoal" sap:content-version="1">
+                <End Type="Z_PDP_TRACKING_SRV.Employee" Multiplicity="1" Role="FromRole_EmpToEmpGoal"/>
+                <End Type="Z_PDP_TRACKING_SRV.EmployeeGoal" Multiplicity="*" Role="ToRole_EmpToEmpGoal"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_EmpToEmpGoal">
+                        <PropertyRef Name="EmpId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_EmpToEmpGoal">
+                        <PropertyRef Name="EmpId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="Z_PDP_TRACKING_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="EmployeeSet" EntityType="Z_PDP_TRACKING_SRV.Employee" sap:creatable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="CourseSet" EntityType="Z_PDP_TRACKING_SRV.Course" sap:creatable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="EmployeeGoalSet" EntityType="Z_PDP_TRACKING_SRV.EmployeeGoal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MetricSet" EntityType="Z_PDP_TRACKING_SRV.Metric" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="EmpToEmpGoalSet" Association="Z_PDP_TRACKING_SRV.EmpToEmpGoal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EmployeeSet" Role="FromRole_EmpToEmpGoal"/>
+                    <End EntitySet="EmployeeGoalSet" Role="ToRole_EmpToEmpGoal"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://sapgw-dev.jabil.com/sap/opu/odata/sap/Z_PDP_TRACKING_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://sapgw-dev.jabil.com/sap/opu/odata/sap/Z_PDP_TRACKING_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
